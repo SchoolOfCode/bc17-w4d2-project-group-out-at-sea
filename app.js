@@ -9,8 +9,11 @@ app.use(
       xPoweredBy: false,
     })
   );
-app.get('/', (req, res) => {
+app.get('/activites', (req, res) => {
     res.send('Hello World! ');
+    res = 
+    res.status(200).json(activities, 'data');
+
 });
 
 app.listen(port, () => {
