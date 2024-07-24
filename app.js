@@ -1,13 +1,16 @@
+// Import everything.
 import express from 'express';
 import helmet from 'helmet';
-
 import {showActivities, 
 addActivities} from './functionality.js';
 
 
-
+// Store the port number and create application instance with express and assign to variables.
 const app = express();
 const port = 3000;
+
+// Not required, but recommended for Express users:
+// app.disable("x-powered-by");
 
 // Ask Helmet to ignore the X-Powered-By header.
 app.use(
@@ -16,22 +19,12 @@ app.use(
     })
   );
 
-// app.get('/activities', async (req, res) => {
-//     const array = await showActivities();
-//     res.status(200).json({array, 'data': 'success'});
-// });
 
-// app.get('/activities', async (req, res) => {
-//   //const astronauts = await getAstronauts();
-//   res.status(200).json({
-//     "success": true,
-//     "payload": await getAstronauts()
-//   })
-// });
-
-
+// When there is a get request made by the client in the route 'activities',
+// event listener listens for a 'get' request and then 
+// run an asynchronous function that returns a json file containing all of the activities.
 app.get('/activities', async (req, res) => {
-
+// assuming the promise is resolved
   try {
     const array = await showActivities();
     res.status(200).json({
@@ -39,10 +32,11 @@ app.get('/activities', async (req, res) => {
       'success': true
     }); 
   }
-
+// If there are any errors with the asynchronous function,
+// catch them.
   catch (error) {
     console.log(error);
-
+// Different status code (500) to show error.
     res.status(500).json({
       'data': null,
       'success': false
@@ -50,10 +44,10 @@ app.get('/activities', async (req, res) => {
   }  
 })
 
-
+// Event listener that listens out for any requests made by client.
+// Has to be at bottom.
 app.listen(port, () => {
     console.log(`server started on ${port}`);
 });
 
-// Not required, but recommended for Express users:
-// app.disable("x-powered-by");
+
