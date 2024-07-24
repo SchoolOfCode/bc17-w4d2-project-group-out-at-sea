@@ -16,18 +16,39 @@ app.use(
     })
   );
 
-app.get('/activities', async (req, res) => {
-    const array = await showActivities();
-    res.status(200).json({array, 'data': 'success'});
-});
+// app.get('/activities', async (req, res) => {
+//     const array = await showActivities();
+//     res.status(200).json({array, 'data': 'success'});
+// });
+
+// app.get('/activities', async (req, res) => {
+//   //const astronauts = await getAstronauts();
+//   res.status(200).json({
+//     "success": true,
+//     "payload": await getAstronauts()
+//   })
+// });
+
 
 app.get('/activities', async (req, res) => {
-  //const astronauts = await getAstronauts();
-  res.status(200).json({
-    "success": true,
-    "payload": await getAstronauts()
-  })
-});
+
+  try {
+    const array = await showActivities();
+    res.status(200).json({
+      'data': array,
+      'success': true
+    }); 
+  }
+
+  catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      'data': null,
+      'success': false
+    });
+  }  
+})
 
 
 app.listen(port, () => {
