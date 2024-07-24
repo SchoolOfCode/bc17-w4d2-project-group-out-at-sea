@@ -1,4 +1,4 @@
-import activities from './activities.json' with {type: 'json'};
+import activities from './activities.json' assert {type: 'json'};
 
 
 export async function showActivities() {
