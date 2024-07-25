@@ -44,6 +44,29 @@ app.get('/activities', async (req, res) => {
   }  
 })
 
+
+app.post('/activities', async (req, res) => {
+    try {
+    const userInput = req.body.data;
+
+    const array = await addActivities(userInput);
+
+    res.status(201).json({
+        'data': array,
+        'success': true
+    })}
+    
+    catch (error) {
+        console.log(error);
+    // Different status code (500) to show error.
+        res.status(500).json({
+          'data': null,
+          'success': false
+        })
+}})
+
+
+
 // Event listener that listens out for any requests made by client.
 // Has to be at bottom.
 app.listen(port, () => {

@@ -6,6 +6,6 @@ export async function showActivities() {
 };
 
 export async function addActivities(activity) {
-    activities.push(activity);
+    activities.data.push(activity);
     return activities;
 }
