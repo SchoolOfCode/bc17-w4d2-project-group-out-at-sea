@@ -9,6 +9,9 @@ addActivities} from './functionality.js';
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+app.use(helmet());
+
 // Not required, but recommended for Express users:
 // app.disable("x-powered-by");
 
@@ -47,7 +50,7 @@ app.get('/activities', async (req, res) => {
 
 app.post('/activities', async (req, res) => {
     try {
-    const userInput = req.body.data;
+    const userInput = req.body;
 
     const array = await addActivities(userInput);
 
