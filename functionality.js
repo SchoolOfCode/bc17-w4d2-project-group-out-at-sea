@@ -9,3 +9,7 @@ export async function addActivities(activity) {
     activities.data.push(activity);
     return activities;
 }
+
+// export async function deleteActivity(Activity.id) {
+//     activities.data.()
+// }

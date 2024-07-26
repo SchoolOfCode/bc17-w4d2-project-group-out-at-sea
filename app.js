@@ -76,6 +76,21 @@ app.post('/activities', async (req, res) => {
 }})
 
 
+app.delete('/activities/:id', (req, res) => {
+  const { id } = req.params;
+  const index = activities.findIndex(activity => activity.id === id);
+  console.log(index);
+
+  if (index !== -1) {
+      activities.splice(index, 1);
+      res.status(200).send(`Activity with ID ${id} deleted successfully.`);
+  } else {
+      res.status(404).send(`Activity with ID ${id} not found.`);
+  }
+});
+
+
+
 
 // Event listener that listens out for any requests made by client.
 // Has to be at bottom.
