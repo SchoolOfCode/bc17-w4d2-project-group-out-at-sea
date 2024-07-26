@@ -1,6 +1,7 @@
 // Import everything.
 import express from 'express';
 import helmet from 'helmet';
+import { v4 as uuidv4 } from "uuid";
 import {showActivities, 
 addActivities} from './functionality.js';
 
@@ -50,9 +51,15 @@ app.get('/activities', async (req, res) => {
 
 app.post('/activities', async (req, res) => {
     try {
-    const userInput = req.body;
+    const inputWithId = {
+      ...req.body,
+      id: uuidv4(),
+      activity_submitted: `${Date.now()}`,
+    }
 
-    const array = await addActivities(userInput);
+
+    const array = await addActivities(inputWithId)
+    ;
 
     res.status(201).json({
         'data': array,
